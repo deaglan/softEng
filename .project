@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
 	<name>attempt</name>
-=======
-	<name>SoftwareEng</name>
->>>>>>> bf6a636cb7ec41559bd00b53565692f3e57d993b
+
+	<name>SoftwareEng</name> 
 	<comment></comment>
 	<projects>
 	</projects>

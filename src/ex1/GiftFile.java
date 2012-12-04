@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 /**
- * @author Snooop
+ * @author Deaglan
  * This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -22,7 +22,9 @@ import java.io.IOException;
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 public class GiftFile {
-	String giftString;
+	String giftStringTrueFalse;
+	String giftStringMCQ;
+	String giftStringMatch;
 	File giftFile;
 	public GiftFile (File giftFileMain) {
 		giftFile = giftFileMain;
@@ -30,8 +32,45 @@ public class GiftFile {
 	public void createTrueFalseQuestion (String questionTitle, String questionText, String questionAnswer){
 		try {
 			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
-			giftString = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
-			bufWrite.write(giftString);
+			
+			giftStringTrueFalse = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			//giftStringMCQ = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			bufWrite.write(giftStringTrueFalse);
+			//bufWrite.write(giftStringMCQ);
+			bufWrite.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createMCQuestion (String questionTitle, String questionText, String questionAnswer, String questionAnswer2, String questionAnswer3, String questionAnswer4){
+		try {
+			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
+			
+			//giftStringTrueFalse = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			giftStringMCQ = String.format("::%s::%s{=%s ~%s ~%s ~%s}%n", questionTitle, questionText, questionAnswer, questionAnswer2, questionAnswer3, questionAnswer4);
+			
+			//bufWrite.write(giftStringTrueFalse);
+			bufWrite.write(giftStringMCQ);
+			bufWrite.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void createMatchQuestion (String questionTitle, String questionText, String questionAnswer, String questionText2, String questionAnswer2, String questionText3, String questionAnswer3){
+		try {
+			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
+			
+			//giftStringTrueFalse = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			giftStringMatch = String.format("::%s::{=%s->%s =%s->%s =%s->%s}%n", questionTitle, questionText, questionAnswer, questionText2, questionAnswer2,  questionText3, questionAnswer3);
+			
+			//bufWrite.write(giftStringTrueFalse);
+			bufWrite.write(giftStringMatch);
 			bufWrite.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

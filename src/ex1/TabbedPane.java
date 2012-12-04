@@ -16,24 +16,32 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
 public class TabbedPane extends JPanel {
 	String giftString;
-	static File gFile =  new File("C:/Users/samsung/Desktop/giftFile.txt");
+	static File gFile = new File("C:/Users/samsung/Desktop/giftFile.txt");
 	static GiftFile giftFile;
+	
+	String correct = "";
+	String wrong1 = "";
+	String wrong2 = "";
+	String wrong3 = "";
+	
+
 	public TabbedPane() {
 		JTabbedPane giftInput = new JTabbedPane();
-//		JPanel jplInnerPanel1 = createTrueFalseInnerPanel();
-//		giftInput.addTab("True/False Question", jplInnerPanel1);
-//		//giftInput.setSelectedIndex(0);
-//		giftInput.addTab("True/False Question", jplInnerPanel1);
-		JPanel jplInnerPanel2 = createMCQInnerPanel();
-		giftInput.addTab("MCQs", jplInnerPanel2);
-		giftInput.setSelectedIndex(0);
-//		JPanel jplInnerPanel3 = createInnerPanel("Q&A Matching");
-//		giftInput.addTab("Question/Answer Matching", jplInnerPanel3);
+		 JPanel jplInnerPanel1 = createTrueFalseInnerPanel();
+//		 giftInput.addTab("True/False Question", jplInnerPanel1);
+//		giftInput.setSelectedIndex(0);
+//	 giftInput.addTab("True/False Question", jplInnerPanel1);
+//		JPanel jplInnerPanel2 = createMCQInnerPanel();
+//		giftInput.addTab("MCQs", jplInnerPanel2);
+//		giftInput.setSelectedIndex(0);
+		 JPanel jplInnerPanel3 = createMatchInnerPanel();
+		 giftInput.addTab("Question/Answer Matching", jplInnerPanel3);
 		// Add the tabbed pane to this panel.
 		setLayout(new GridLayout(1, 1));
 		add(giftInput);
@@ -67,29 +75,30 @@ public class TabbedPane extends JPanel {
 		jbSaveQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String questionAnswer;
-				if(jcTrue.isSelected())
+				if (jcTrue.isSelected())
 					questionAnswer = "T";
 				else
 					questionAnswer = "F";
-				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(), jtQuestion.getText(), questionAnswer);
+				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(),
+						jtQuestion.getText(), questionAnswer);
 			}
 		});
 		return jp;
 	}
-	
-	
+
 	protected JPanel createMCQInnerPanel() {
-		JPanel jp = new JPanel(new MigLayout("", "[align right][ grow, fill]", "[][][][]"));
+		JPanel jp = new JPanel(new MigLayout("",
+				"[align right, grow][][grow][][grow]", "[][grow][][]"));
 
 		JLabel jlQTitle = new JLabel("Question Title:");
 		final JTextArea jtQuestionTitle = new JTextArea("Title", 1, 20);
 		jp.add(jlQTitle);
-		jp.add(jtQuestionTitle, "wrap");
+		jp.add(jtQuestionTitle, "wrap, grow, span 4 ");
 
 		JLabel jlQuestion = new JLabel("Question:");
 		final JTextArea jtQuestion = new JTextArea("Question Text");
 		jp.add(jlQuestion);
-		jp.add(jtQuestion, "wrap, growxy");
+		jp.add(jtQuestion, "span 4, wrap, grow");
 
 		JLabel jlCorrectAnswer = new JLabel("Correct Answer");
 		final ButtonGroup btnGrp = new ButtonGroup();
@@ -97,30 +106,128 @@ public class TabbedPane extends JPanel {
 		final JRadioButton opt2 = new JRadioButton("");
 		final JRadioButton opt3 = new JRadioButton("");
 		final JRadioButton opt4 = new JRadioButton("");
+		final JTextField posAns1 = new JTextField("");
+		final JTextField posAns2 = new JTextField("");
+		final JTextField posAns3 = new JTextField("");
+		final JTextField posAns4 = new JTextField("");
 		btnGrp.add(opt1);
 		btnGrp.add(opt2);
 		btnGrp.add(opt3);
 		btnGrp.add(opt4);
 		jp.add(jlCorrectAnswer);
 		jp.add(opt1);
-		jp.add(opt2, "wrap");
+		jp.add(posAns1, "align left,grow");
+		jp.add(opt2);
+		jp.add(posAns2, "wrap, grow");
 		jp.add(opt3, "skip");
-		jp.add(opt4, "wrap");
+		jp.add(posAns3, "grow");
+		jp.add(opt4);
+		jp.add(posAns4, "wrap, grow");
 
 		JButton jbSaveQuestion = new JButton("Save Question");
 		jp.add(jbSaveQuestion);
 		jbSaveQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String questionAnswer;
-				if(opt3.isSelected())
-					questionAnswer = "T";
-				else
-					questionAnswer = "F";
-				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(), jtQuestion.getText(), questionAnswer);
+
+				if (opt1.isSelected()) {
+					correct = posAns1.getText();
+					wrong1 = posAns2.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt2.isSelected()) {
+					correct = posAns2.getText();
+					wrong1 = posAns1.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt3.isSelected()) {
+					correct = posAns3.getText();
+					wrong1 = posAns2.getText();
+					wrong2 = posAns1.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt4.isSelected()) {
+					correct = posAns4.getText();
+					wrong1 = posAns2.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns1.getText();
+				}
+				giftFile.createMCQuestion(jtQuestionTitle.getText(),
+						jtQuestion.getText(), correct, wrong1,
+						wrong2, wrong3);
 			}
 		});
 		return jp;
 	}
+	
+	
+	protected JPanel createMatchInnerPanel() {
+		JPanel jp = new JPanel(new MigLayout("",
+				"[align right, grow][][grow][][grow]", "[][][][]"));
+
+		JLabel jlQTitle = new JLabel("Question Title:");
+		final JTextArea jtQuestionTitle = new JTextArea("Title", 1, 20);
+		jp.add(jlQTitle);
+		jp.add(jtQuestionTitle, "wrap, grow, span 4 ");
+		
+		JTextField jtQuestion = new JTextField();
+		JTextField jtQuestion2 = new JTextField();
+		JTextField jtQuestion3 = new JTextField();
+		JTextField jtAns =new JTextField();
+		JTextField jtAns2 =new JTextField();
+		JTextField jtAns3 =new JTextField();
+		JLabel jlCorrectAnswer = new JLabel("Correct Answers");
+		
+		
+
+		
+		jp.add(jlCorrectAnswer);
+		jp.add(jtQuestion);
+		jp.add(jtAns, "align left,grow");
+		jp.add(jtQuestion2);
+		jp.add(jtAns2, "wrap, grow");
+		jp.add(jtQuestion3, "skip");
+		jp.add(jtAns3, "grow");
+//		jp.add(opt4);
+//		jp.add(posAns4, "wrap, grow");
+
+		JButton jbSaveQuestion = new JButton("Save Question");
+		jp.add(jbSaveQuestion);
+		jbSaveQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (opt1.isSelected()) {
+					wrong1 = posAns2.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt2.isSelected()) {
+					correct = posAns2.getText();
+					wrong1 = posAns1.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt3.isSelected()) {
+					correct = posAns3.getText();
+					wrong1 = posAns2.getText();
+					wrong2 = posAns1.getText();
+					wrong3 = posAns4.getText();
+				}
+				if (opt4.isSelected()) {
+					correct = posAns4.getText();
+					wrong1 = posAns2.getText();
+					wrong2 = posAns3.getText();
+					wrong3 = posAns1.getText();
+				}
+				giftFile.createMCQuestion(jtQuestionTitle.getText(),
+						jtQuestion.getText(), jtQuestion2.getText(), jtQuestion3.getText(), correct, wrong1,
+						wrong2, wrong3);
+			}
+		});
+		return jp;
+	}
+	
 	
 
 	protected JPanel createInnerPanel(String text) {

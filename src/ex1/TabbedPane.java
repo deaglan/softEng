@@ -173,9 +173,9 @@ public class TabbedPane extends JPanel {
 		JLabel aLabel = new JLabel("A");
 		JLabel bLabel = new JLabel("B");
 		JLabel cLabel = new JLabel("C");
-		JTextArea input1 = new JTextArea(" ", 1,3);
-		JTextArea input2 = new JTextArea(" ", 1,3);
-		JTextArea input3 = new JTextArea(" ", 1, 3);
+//		JTextArea input1 = new JTextArea(" ", 1,3);
+//		JTextArea input2 = new JTextArea(" ", 1,3);
+//		JTextArea input3 = new JTextArea(" ", 1, 3);
 		JTextField jtQuestion = new JTextField();
 		JTextField jtQuestion2 = new JTextField();
 		JTextField jtQuestion3 = new JTextField();
@@ -187,18 +187,18 @@ public class TabbedPane extends JPanel {
 		
 
 		
-		jp.add(jlCorrectAnswer);
-		jp.add(aLabel);
-		jp.add(jtQuestion, "align left, grow");
-		jp.add(input1, "grow");
+		jp.add(jlCorrectAnswer, "align left");
+		jp.add(aLabel, "align left");
+		jp.add(jtQuestion, "span 2, grow");
+		jp.add(aLabel, "skip");
 		jp.add(jtAns, "grow,wrap");
 		jp.add(bLabel);
 		jp.add(jtQuestion2, "skip, grow");
-		jp.add(input2);
+		jp.add(bLabel, "skip");
 		jp.add(jtAns2, "wrap, grow");
 		jp.add(cLabel);
 		jp.add(jtQuestion3, "skip, grow");
-		jp.add(input3);
+		jp.add(cLabel, "skip");
 		jp.add(jtAns3, "grow,wrap");
 		
 

@@ -170,7 +170,12 @@ public class TabbedPane extends JPanel {
 		final JTextArea jtQuestionTitle = new JTextArea("Title", 1, 20);
 		jp.add(jlQTitle);
 		jp.add(jtQuestionTitle, "wrap, grow, span 4 ");
-		
+		JLabel aLabel = new JLabel("A");
+		JLabel bLabel = new JLabel("B");
+		JLabel cLabel = new JLabel("C");
+		JTextArea input1 = new JTextArea(" ", 1,3);
+		JTextArea input2 = new JTextArea(" ", 1,3);
+		JTextArea input3 = new JTextArea(" ", 1, 3);
 		JTextField jtQuestion = new JTextField();
 		JTextField jtQuestion2 = new JTextField();
 		JTextField jtQuestion3 = new JTextField();
@@ -183,46 +188,51 @@ public class TabbedPane extends JPanel {
 
 		
 		jp.add(jlCorrectAnswer);
-		jp.add(jtQuestion);
-		jp.add(jtAns, "align left,grow");
-		jp.add(jtQuestion2);
+		jp.add(aLabel);
+		jp.add(jtQuestion, "align left, grow");
+		jp.add(input1, "grow");
+		jp.add(jtAns, "grow,wrap");
+		jp.add(bLabel);
+		jp.add(jtQuestion2, "skip, grow");
+		jp.add(input2);
 		jp.add(jtAns2, "wrap, grow");
-		jp.add(jtQuestion3, "skip");
-		jp.add(jtAns3, "grow");
-//		jp.add(opt4);
-//		jp.add(posAns4, "wrap, grow");
+		jp.add(cLabel);
+		jp.add(jtQuestion3, "skip, grow");
+		jp.add(input3);
+		jp.add(jtAns3, "grow,wrap");
+		
 
 		JButton jbSaveQuestion = new JButton("Save Question");
 		jp.add(jbSaveQuestion);
 		jbSaveQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (opt1.isSelected()) {
-					wrong1 = posAns2.getText();
-					wrong2 = posAns3.getText();
-					wrong3 = posAns4.getText();
-				}
-				if (opt2.isSelected()) {
-					correct = posAns2.getText();
-					wrong1 = posAns1.getText();
-					wrong2 = posAns3.getText();
-					wrong3 = posAns4.getText();
-				}
-				if (opt3.isSelected()) {
-					correct = posAns3.getText();
-					wrong1 = posAns2.getText();
-					wrong2 = posAns1.getText();
-					wrong3 = posAns4.getText();
-				}
-				if (opt4.isSelected()) {
-					correct = posAns4.getText();
-					wrong1 = posAns2.getText();
-					wrong2 = posAns3.getText();
-					wrong3 = posAns1.getText();
-				}
-				giftFile.createMCQuestion(jtQuestionTitle.getText(),
-						jtQuestion.getText(), jtQuestion2.getText(), jtQuestion3.getText(), correct, wrong1,
-						wrong2, wrong3);
+//				if (opt1.isSelected()) {
+//					wrong1 = posAns2.getText();
+//					wrong2 = posAns3.getText();
+//					wrong3 = posAns4.getText();
+//				}
+//				if (opt2.isSelected()) {
+//					correct = posAns2.getText();
+//					wrong1 = posAns1.getText();
+//					wrong2 = posAns3.getText();
+//					wrong3 = posAns4.getText();
+//				}
+//				if (opt3.isSelected()) {
+//					correct = posAns3.getText();
+//					wrong1 = posAns2.getText();
+//					wrong2 = posAns1.getText();
+//					wrong3 = posAns4.getText();
+//				}
+//				if (opt4.isSelected()) {
+//					correct = posAns4.getText();
+//					wrong1 = posAns2.getText();
+//					wrong2 = posAns3.getText();
+//					wrong3 = posAns1.getText();
+//				}
+//			giftFile.createMCQuestion(jtQuestionTitle.getText(),
+//						jtQuestion.getText(), jtQuestion2.getText(), jtQuestion3.getText(), correct, wrong1,
+//							wrong2, wrong3);
 			}
 		});
 		return jp;

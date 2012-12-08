@@ -25,6 +25,9 @@ public class GiftFile {
 	String giftStringTrueFalse;
 	String giftStringMCQ;
 	String giftStringMatch;
+	String giftEssay;
+	String giftMath;
+	
 	File giftFile;
 	public GiftFile (File giftFileMain) {
 		giftFile = giftFileMain;
@@ -77,5 +80,20 @@ public class GiftFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void createEssayQuestion (String questionTitle, String questionText, String questionAnswer){
+		try {
+			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
+			
+			giftStringTrueFalse = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			bufWrite.write(giftStringTrueFalse);
+			bufWrite.close();
+			
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 }

@@ -86,8 +86,23 @@ public class GiftFile {
 		try {
 			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
 			
-			giftStringTrueFalse = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
-			bufWrite.write(giftStringTrueFalse);
+			giftEssay = String.format("::%s:: %s {%s}%n", questionTitle, questionText, questionAnswer);
+			bufWrite.write(giftEssay);
+			bufWrite.close();
+			
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public void createMathsQuestion (String questionTitle, String questionText, String questionAnswer, String tolerence){
+		try {
+			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
+			
+			giftMath = String.format("::%s:: %s {#%s:%s}%n", questionTitle, questionText, questionAnswer, tolerence);
+			bufWrite.write(giftMath);
 			bufWrite.close();
 			
 			} catch (FileNotFoundException e) {

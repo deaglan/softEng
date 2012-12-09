@@ -43,6 +43,8 @@ public class TabbedPane extends JPanel {
 		 giftInput.addTab("Question/Answer Matching", jplInnerPanel3);
 		 JPanel jplInnerPanel4 = createEssayPanel();
 		 giftInput.addTab("Essay Question", jplInnerPanel4);
+		 JPanel jplInnerPanel5 = createEssayPanel();
+		 giftInput.addTab("Maths Question", jplInnerPanel5);
 		// Add the tabbed pane to this panel.
 		setLayout(new GridLayout(1, 1));
 		add(giftInput);
@@ -228,7 +230,37 @@ public class TabbedPane extends JPanel {
 		final JTextArea jtAns = new JTextArea("", 0,10);
 
 		jp.add(jlCorrectAnswer);
-		jp.add(jtAns, "grow,flowy,wrap");
+		jp.add(jtAns, "grow,wrap");
+
+		JButton jbSaveQuestion = new JButton("Save Question");
+		jp.add(jbSaveQuestion);
+		jbSaveQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(),
+						jtQuestion.getText(), jtAns.getText());
+			}
+		});
+		return jp;
+	}
+	
+	protected JPanel createMathsPanel() {
+		JPanel jp = new JPanel(new MigLayout("", "[align right][fill]", "[][][][]"));
+
+		JLabel jlQTitle = new JLabel("Question Title:");
+		final JTextArea jtQuestionTitle = new JTextArea("Title", 1, 20);
+		jp.add(jlQTitle);
+		jp.add(jtQuestionTitle, "wrap");
+
+		JLabel jlQuestion = new JLabel("Question:");
+		final JTextArea jtQuestion = new JTextArea("Question Text", 4, 10);
+		jp.add(jlQuestion);
+		jp.add(jtQuestion, "wrap");
+
+		JLabel jlCorrectAnswer = new JLabel("Correct Answer");
+		final JTextArea jtAns = new JTextArea("", 0,10);
+
+		jp.add(jlCorrectAnswer);
+		jp.add(jtAns, "grow,wrap");
 
 		JButton jbSaveQuestion = new JButton("Save Question");
 		jp.add(jbSaveQuestion);

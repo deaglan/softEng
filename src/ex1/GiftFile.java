@@ -97,11 +97,11 @@ public class GiftFile {
 			}
 	}
 	
-	public void createMathsQuestion (String questionTitle, String questionText, String questionAnswer, String tolerence){
+	public void createMathsQuestion (String questionTitle, String questionText, String questionAnswer, String tolerence, String credit ){
 		try {
 			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
 			
-			giftMath = String.format("::%s:: %s {#%s:%s}%n", questionTitle, questionText, questionAnswer, tolerence);
+			giftMath = String.format("::%s:: %s {#%s:%s # Correct}%n", questionTitle, questionText, questionAnswer, tolerence, credit);
 			bufWrite.write(giftMath);
 			bufWrite.close();
 			

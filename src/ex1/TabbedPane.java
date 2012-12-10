@@ -59,7 +59,7 @@ public class TabbedPane extends JPanel {
 		 giftInput.addTab("Question/Answer Matching", jplInnerPanel3);
 		 JPanel jplInnerPanel4 = createEssayPanel();
 		 giftInput.addTab("Essay Question", jplInnerPanel4);
-		 JPanel jplInnerPanel5 = createEssayPanel();
+		 JPanel jplInnerPanel5 = createMathsPanel();
 		 giftInput.addTab("Maths Question", jplInnerPanel5);
 		// Add the tabbed pane to this panel.
 		setLayout(new GridLayout(1, 1));
@@ -252,7 +252,7 @@ public class TabbedPane extends JPanel {
 		jp.add(jbSaveQuestion);
 		jbSaveQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(),
+				giftFile.createEssayQuestion(jtQuestionTitle.getText(),
 						jtQuestion.getText(), jtAns.getText());
 			}
 		});
@@ -260,7 +260,7 @@ public class TabbedPane extends JPanel {
 	}
 	
 	protected JPanel createMathsPanel() {
-		JPanel jp = new JPanel(new MigLayout("", "[align right][fill]", "[][][][]"));
+		JPanel jp = new JPanel(new MigLayout("", "[align right][grow,fill]", "[][][][][][]"));
 
 		JLabel jlQTitle = new JLabel("Question Title:");
 		final JTextArea jtQuestionTitle = new JTextArea("Title", 1, 20);
@@ -271,19 +271,28 @@ public class TabbedPane extends JPanel {
 		final JTextArea jtQuestion = new JTextArea("Question Text", 4, 10);
 		jp.add(jlQuestion);
 		jp.add(jtQuestion, "wrap");
+		JLabel jlcredit = new JLabel("Marking:");
+		final JTextArea jtCredit = new JTextArea("Marking", 4, 10);
+		
 
 		JLabel jlCorrectAnswer = new JLabel("Correct Answer");
 		final JTextArea jtAns = new JTextArea("", 0,10);
+		JLabel jlTolerence = new JLabel("Tolerence");
+		final JTextArea jtTolerence = new JTextArea("", 0,10);
 
 		jp.add(jlCorrectAnswer);
 		jp.add(jtAns, "grow,wrap");
+		jp.add(jlTolerence);
+		jp.add(jtTolerence, "grow, wrap");
+		jp.add(jlcredit);
+		jp.add(jtCredit, "wrap,grow");
 
 		JButton jbSaveQuestion = new JButton("Save Question");
 		jp.add(jbSaveQuestion);
 		jbSaveQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				giftFile.createTrueFalseQuestion(jtQuestionTitle.getText(),
-						jtQuestion.getText(), jtAns.getText());
+				giftFile.createMathsQuestion(jtQuestionTitle.getText(),
+						jtQuestion.getText(), jtAns.getText(), jtTolerence.getText(), jtCredit.getText());
 			}
 		});
 		return jp;

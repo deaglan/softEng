@@ -101,7 +101,7 @@ public class GiftFile {
 		try {
 			BufferedWriter bufWrite = new BufferedWriter(new FileWriter(giftFile, true));
 			
-			giftMath = String.format("::%s:: %s {#%s:%s # Correct}%n", questionTitle, questionText, questionAnswer, tolerence, credit);
+			giftMath = String.format("::%s:: %s {#%s:%s #%s}%n", questionTitle, questionText, questionAnswer, tolerence, credit);
 			bufWrite.write(giftMath);
 			bufWrite.close();
 			
